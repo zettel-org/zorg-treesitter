@@ -69,10 +69,16 @@ There are no nodes for `.zo`, `.zoq`, `.zot`, `.zoc`, `ID::`, `LID::`,
 - `test/corpus/`: Tree-sitter corpus tests seeded from the shared Zorg fixtures.
 - `corpus`: compatibility symlink to `test/corpus` for agents expecting the
   top-level path named in the Epic 1 plan.
-- `queries/highlights.scm`: starter syntax highlight captures.
-- `queries/locals.scm`: placeholder for future local-ID scope captures.
-- `queries/folds.scm`: placeholder for future fold captures.
-- `queries/injections.scm`: placeholder for future fenced-code injections.
+- `queries/highlights.scm`: syntax highlight captures for IDs, links, tags,
+  properties, todos, list/header/code fences, fence languages, and opening
+  titles.
+- `queries/folds.scm`: fold captures for file headers, zettel subtrees, and
+  fenced code blocks.
+- `queries/locals.scm`: conservative local-ID declaration captures scoped to
+  zettel items. Reference resolution remains semantic.
+- `queries/injections.scm`: fenced-code body injections using the fence
+  `info_string` as the injection language, including `swog`, `zorg-template`,
+  and ordinary language names.
 - `tree-sitter.json`: CLI grammar metadata and query locations.
 
 ## Generated Artifacts
@@ -122,3 +128,19 @@ Before handing off grammar work, run:
 npm run generate
 npm test
 ```
+
+Smoke-test editor highlighting with the representative `.z` fixture:
+
+```sh
+npx tree-sitter highlight test/highlight/smoke.z
+```
+
+If using a globally installed CLI instead of npm, run:
+
+```sh
+tree-sitter highlight test/highlight/smoke.z
+```
+
+The CLI may warn when no global parser directories are configured; that warning
+does not block this local grammar smoke test when highlighted output is
+produced.

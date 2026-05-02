@@ -1,0 +1,16 @@
+%%% @smoke #z/ref #area/work title::Smoke
+Editor query smoke fixture
+%%%
+
+- @project/plan #z/todo #area/work [N] due::2026-05-15 Plan the next milestone.
+  - ^task #z/todo [ ] do::2026-05-02 Write the notes.
+    This links to #project/plan, child +task, and sibling ~review.
+  ```swog
+  #z/todo -done:*
+  ```
+  ```zorg-template
+  - @{{id}} #z/todo [ ] {{title}}
+  ```
+  ```rust
+  let done = false;
+  ```

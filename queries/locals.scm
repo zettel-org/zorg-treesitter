@@ -1,3 +1,5 @@
-; Zorg has no local-variable model in the Epic 1 grammar skeleton.
-; Future grammar phases may add captures here if editor integrations need
-; structured local ID scopes.
+; Zorg local IDs are source-backed declarations, but resolution is semantic.
+
+(zettel_item) @local.scope
+
+(local_id) @local.definition

@@ -1,3 +1,7 @@
-; Placeholder for fold captures.
-; Later grammar work should fold file headers, nested zettel subtrees, and
-; fenced code blocks once those constructs have stable node boundaries.
+; Fold stable source-backed structural regions.
+
+(file_header) @fold
+
+(zettel_item) @fold
+
+(fenced_code_block) @fold
