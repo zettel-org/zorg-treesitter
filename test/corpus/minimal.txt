@@ -12,70 +12,84 @@ property, tag, and paragraph.
 ---
 
 (source_file
+  (blank_line)
   (file_header
-    (percent_fence)
-    (id)
-    (hash_reference)
-    (property)
-    (text)
-    (text)
-    (percent_fence))
-  (text)
-  (text)
-  (text)
-  (text)
-  (text)
-  (text)
-  (text)
-  (text)
-  (text)
-  (text)
-  (text)
-  (text)
-  (text)
-  (text)
-  (text)
-  (text))
+    (file_header_open
+      (percent_fence)
+      (id)
+      (hash_reference)
+      (property))
+    (header_line
+      (title_text)
+      (title_text))
+    (file_header_close
+      (percent_fence)))
+  (blank_line)
+  (paragraph
+    (paragraph_line
+      (title_text)
+      (title_text)
+      (title_text)
+      (title_text)
+      (title_text)
+      (title_text)
+      (title_text)
+      (title_text)
+      (title_text)
+      (title_text)
+      (title_text)
+      (title_text))
+    (paragraph_line
+      (title_text)
+      (title_text)
+      (title_text)
+      (title_text))))
 
 ==================
 Nested zettel tokens
 ==================
 
 - @project/plan #z/todo [N] due::2026-05-15 Plan the next Zorg milestone.
-  The plan links to its child +task and sibling ~review.
-
   - ^task #z/todo [ ] do::2026-05-02 Write the implementation notes.
+    The plan links to its child +task and sibling ~review.
 
 ---
 
 (source_file
-  (list_marker)
-  (id)
-  (hash_reference)
-  (todo_marker)
-  (property)
-  (text)
-  (text)
-  (text)
-  (text)
-  (text)
-  (text)
-  (text)
-  (text)
-  (text)
-  (text)
-  (text)
-  (child_link)
-  (text)
-  (text)
-  (sibling_link)
-  (text)
-  (list_marker)
-  (local_id)
-  (hash_reference)
-  (todo_marker)
-  (property)
-  (text)
-  (text)
-  (text)
-  (text))
+  (blank_line)
+  (zettel_item
+    (zettel_opening
+      (list_marker)
+      (id)
+      (hash_reference)
+      (todo_marker)
+      (property)
+      (title_text)
+      (title_text)
+      (title_text)
+      (title_text)
+      (title_text))
+    (zettel_item
+      (zettel_opening
+        (list_marker)
+        (local_id)
+        (hash_reference)
+        (todo_marker)
+        (property)
+        (title_text)
+        (title_text)
+        (title_text)
+        (title_text))
+      (paragraph
+        (paragraph_line
+          (title_text)
+          (title_text)
+          (title_text)
+          (title_text)
+          (title_text)
+          (title_text)
+          (child_link)
+          (title_text)
+          (title_text)
+          (sibling_link)
+          (title_text))))))

@@ -62,6 +62,13 @@ contract update and matching downstream audit.
 - `fence_start`: opening triple-backtick fence, including optional info string.
 - `fence_end`: closing triple-backtick fence.
 
+Zettel nesting is line-oriented and currently models normal Zorg two-space
+indentation for source spans and folds. It is intentionally not a complete
+Markdown list parser.
+
+Zorg v1 does not document comment syntax, so `comment` remains reserved and is
+not emitted.
+
 ## Public Inline Nodes
 
 - `id`: absolute zettel ID declaration, such as `@alpha` or `@alpha/beta`.

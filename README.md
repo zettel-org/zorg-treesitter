@@ -33,18 +33,24 @@ The grammar intentionally does not implement:
 - broad Markdown parsing beyond the Zorg structures needed for source spans
 - compatibility syntax for the Python-era formats
 
-The current checked-in grammar is still the conservative token skeleton that
-later Epic 2 phases will replace with structural rules. It recognizes:
+The current checked-in grammar is a structural block grammar. It recognizes:
 
 - percent-fenced file headers
+- header opening, header body, and header closing lines
+- nested zettel openings and ordinary indented body spans
+- paragraphs and blank line separators
 - absolute IDs such as `@project/plan`
 - local IDs such as `^task`
 - hash references such as `#z/todo` and `#project/plan`
 - child and sibling links such as `+task` and `~review`
 - `key::value` properties
 - todo markers `[ ]`, `[N]`, `[X]`, and `[?]`
-- Markdown-style code fences
-- basic text
+- Markdown-style fenced code blocks, including fence boundaries, info strings,
+  and raw body lines
+- title text
+
+The grammar models common two-space Zorg list indentation directly for stable
+source spans. It does not try to implement full Markdown list semantics.
 
 There are no nodes for `.zo`, `.zoq`, `.zot`, `.zoc`, `ID::`, `LID::`,
 `tick::`, old folgezettel IDs, tag sugar, or Python-era link behavior.

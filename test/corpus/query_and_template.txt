@@ -7,12 +7,15 @@ Query property example
 ---
 
 (source_file
-  (list_marker)
-  (id)
-  (hash_reference)
-  (property)
-  (text)
-  (property))
+  (blank_line)
+  (zettel_item
+    (zettel_opening
+      (list_marker)
+      (id)
+      (hash_reference)
+      (property)
+      (title_text)
+      (property))))
 
 ==================
 Query swog fence
@@ -26,15 +29,20 @@ Query swog fence
 ---
 
 (source_file
-  (list_marker)
-  (id)
-  (hash_reference)
-  (property)
-  (code_fence)
-  (hash_reference)
-  (list_marker)
-  (text)
-  (code_fence))
+  (blank_line)
+  (zettel_item
+    (zettel_opening
+      (list_marker)
+      (id)
+      (hash_reference)
+      (property))
+    (fenced_code_block
+      (fence_start
+        (code_fence_delimiter)
+        (info_string))
+      (code_fence_content)
+      (fence_end
+        (code_fence_delimiter)))))
 
 ==================
 Template fence
@@ -48,17 +56,18 @@ Template fence
 ---
 
 (source_file
-  (list_marker)
-  (id)
-  (hash_reference)
-  (property)
-  (property)
-  (code_fence)
-  (list_marker)
-  (text)
-  (hash_reference)
-  (todo_marker)
-  (property)
-  (property)
-  (text)
-  (code_fence))
+  (blank_line)
+  (zettel_item
+    (zettel_opening
+      (list_marker)
+      (id)
+      (hash_reference)
+      (property)
+      (property))
+    (fenced_code_block
+      (fence_start
+        (code_fence_delimiter)
+        (info_string))
+      (code_fence_content)
+      (fence_end
+        (code_fence_delimiter)))))

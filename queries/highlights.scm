@@ -1,6 +1,5 @@
 ; Initial Zorg highlight query.
-; These captures are intentionally token-level until the grammar grows
-; semantic nodes for file headers, nested zettel, and fenced code bodies.
+; These captures stay conservative while the grammar grows semantic detail.
 
 (id) @constant
 (local_id) @constant
@@ -10,4 +9,6 @@
 (child_link) @reference
 (sibling_link) @reference
 (percent_fence) @punctuation.delimiter
-(code_fence) @punctuation.special
+(list_marker) @punctuation.special
+(code_fence_delimiter) @punctuation.special
+(info_string) @string.special

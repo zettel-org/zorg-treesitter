@@ -11,14 +11,21 @@ old folgezettel 1a2b and file.zot are unsupported
 ---
 
 (source_file
-  (text)
-  (text)
-  (text)
-  (text)
-  (text)
-  (text)
-  (text)
-  (text)
-  (text)
-  (text)
-  (text))
+  (blank_line)
+  (paragraph
+    (paragraph_line
+      (title_text))
+    (paragraph_line
+      (title_text))
+    (paragraph_line
+      (title_text))
+    (paragraph_line
+      (title_text))
+    (paragraph_line
+      (title_text)
+      (title_text)
+      (title_text)
+      (title_text)
+      (title_text)
+      (title_text)
+      (title_text))))
