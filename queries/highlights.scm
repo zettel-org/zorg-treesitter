@@ -3,8 +3,12 @@
 
 (id) @constant
 (local_id) @constant
-(hash_reference) @tag
+(absolute_link) @reference
+(tag) @tag
+(type_tag) @tag.special
 (property) @property
+(property_key) @property
+(property_value) @string
 (todo_marker) @keyword
 (child_link) @reference
 (sibling_link) @reference

@@ -291,7 +291,7 @@ module.exports = grammar({
     _paragraph_inline_run: $ => seq(
       $._paragraph_inline_item,
       repeat(choice(
-        seq($._hspace, $._inline_item),
+        seq($._hspace, $._paragraph_inline_item),
         alias($._attached_text, $.title_text),
       )),
     ),
@@ -303,8 +303,10 @@ module.exports = grammar({
       $.local_id,
       $.child_link,
       $.sibling_link,
-      $.hash_reference,
+      $.type_tag,
+      $.tag,
       alias($._legacy_text, $.title_text),
+      alias($._invalid_marker_text, $.title_text),
       $.title_text,
     ),
 
@@ -315,8 +317,10 @@ module.exports = grammar({
       $.local_id,
       $.child_link,
       $.sibling_link,
-      $.hash_reference,
+      $.type_tag,
+      $.absolute_link,
       alias($._legacy_text, $.title_text),
+      alias($._invalid_marker_text, $.title_text),
       alias($._paragraph_text, $.title_text),
     ),
 
@@ -344,20 +348,76 @@ module.exports = grammar({
 
     todo_marker: _ => token(prec(2, /\[( |N|X|\?)\]/)),
 
-    property: _ => token(prec(2, /[A-Za-z][A-Za-z0-9_-]*::[^\s]+/)),
+    property: $ => prec(2, seq(
+      $.property_key,
+      $.property_value,
+    )),
 
-    id: _ => token(prec(2, /@[A-Za-z0-9][A-Za-z0-9_-]*(\/[A-Za-z0-9][A-Za-z0-9_-]*)*/)),
+    property_key: _ => token(prec(3, /[A-Za-z][A-Za-z0-9_-]*::/)),
 
-    local_id: _ => token(prec(2, /\^[A-Za-z0-9][A-Za-z0-9_-]*/)),
+    property_value: _ => token.immediate(prec(3, /[^\s]+/)),
 
-    child_link: _ => token(prec(2, /\+[A-Za-z0-9][A-Za-z0-9_-]*/)),
+    id: $ => prec(2, seq(
+      $._id_marker,
+      $.id_segment,
+      repeat(seq($._path_separator, $.id_segment)),
+    )),
 
-    sibling_link: _ => token(prec(2, /~[A-Za-z0-9][A-Za-z0-9_-]*/)),
+    local_id: $ => prec(2, seq(
+      $._local_id_marker,
+      $.id_segment,
+    )),
 
-    hash_reference: _ => token(prec(2, /#[A-Za-z0-9][A-Za-z0-9_-]*(\/[A-Za-z0-9][A-Za-z0-9_-]*)*/)),
+    absolute_link: $ => prec(2, seq(
+      $._hash_marker,
+      $.id_segment,
+      repeat(seq($._path_separator, $.id_segment)),
+    )),
+
+    child_link: $ => prec(2, seq(
+      $._child_link_marker,
+      $.id_segment,
+    )),
+
+    sibling_link: $ => prec(2, seq(
+      $._sibling_link_marker,
+      $.id_segment,
+    )),
+
+    tag: $ => prec(2, seq(
+      $._hash_marker,
+      $.id_segment,
+      repeat(seq($._path_separator, $.id_segment)),
+    )),
+
+    type_tag: $ => prec(3, seq(
+      $._hash_marker,
+      alias($._z_segment, $.id_segment),
+      $._path_separator,
+      $.id_segment,
+      repeat(seq($._path_separator, $.id_segment)),
+    )),
+
+    id_segment: _ => token.immediate(prec(3, /[A-Za-z0-9][A-Za-z0-9_-]*/)),
+
+    _id_marker: _ => token(prec(4, "@")),
+
+    _local_id_marker: _ => token(prec(4, "^")),
+
+    _hash_marker: _ => token(prec(4, "#")),
+
+    _child_link_marker: _ => token(prec(4, "+")),
+
+    _sibling_link_marker: _ => token(prec(4, "~")),
+
+    _path_separator: _ => token.immediate(prec(4, "/")),
+
+    _z_segment: _ => token.immediate(prec(4, "z")),
 
     // Legacy-looking property names must not be tokenized as v1 properties.
-    _legacy_text: _ => token(prec(3, /(ID|LID|tick)::[^\s]+/)),
+    _legacy_text: _ => token(prec(5, /(ID|LID|tick)::[^\s]+/)),
+
+    _invalid_marker_text: _ => token(prec(5, /(@{2,}|#{2,}|\^{2,}|\+{2,}|~{2,})[^\s]*/)),
 
     title_text: _ => token(prec(1, choice(
       /[^`\s]+/,

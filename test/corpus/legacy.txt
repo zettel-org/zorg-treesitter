@@ -29,3 +29,34 @@ old folgezettel 1a2b and file.zot are unsupported
       (title_text)
       (title_text)
       (title_text))))
+
+==================
+Malformed v1 primitives
+==================
+
+@@bad
+^^local
+++child
+~~sibling
+[Y]
+missing-value::
+
+---
+
+(source_file
+  (blank_line)
+  (paragraph
+    (paragraph_line
+      (title_text))
+    (paragraph_line
+      (title_text))
+    (paragraph_line
+      (title_text))
+    (paragraph_line
+      (title_text))
+    (paragraph_line
+      (title_text))
+    (paragraph_line
+      (property
+        (property_key)
+        (MISSING property_value)))))

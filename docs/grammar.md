@@ -84,7 +84,9 @@ not emitted.
   `#area/work`.
 - `type_tag`: tag in the reserved `#z/...` namespace.
 - `property`: complete `key::value` property.
-- `property_key`: key portion of a property.
+- `property_key`: key portion of a property. In the current grammar this node
+  includes the trailing `::` delimiter so ordinary prose words do not tokenize
+  as keys before the parser can see whether a value follows.
 - `property_value`: raw value portion of a property. Trimming and type parsing
   belong to semantic consumers.
 - `todo_marker`: one of `[ ]`, `[N]`, `[X]`, or `[?]`.

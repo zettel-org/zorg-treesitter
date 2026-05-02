@@ -2,12 +2,12 @@
 Minimal file zettel
 ==================
 
-%%% @minimal #z/ref area::work/research
+%%% @minimal #z/ref #area/work area::work/research
 Minimal fixture
 %%%
 
 This file zettel demonstrates the smallest accepted `.z` source with an ID,
-property, tag, and paragraph.
+property, tag, type tag, and paragraph.
 
 ---
 
@@ -16,9 +16,17 @@ property, tag, and paragraph.
   (file_header
     (file_header_open
       (percent_fence)
-      (id)
-      (hash_reference)
-      (property))
+      (id
+        (id_segment))
+      (type_tag
+        (id_segment)
+        (id_segment))
+      (tag
+        (id_segment)
+        (id_segment))
+      (property
+        (property_key)
+        (property_value)))
     (header_line
       (title_text)
       (title_text))
@@ -43,15 +51,17 @@ property, tag, and paragraph.
       (title_text)
       (title_text)
       (title_text)
+      (title_text)
+      (title_text)
       (title_text))))
 
 ==================
 Nested zettel tokens
 ==================
 
-- @project/plan #z/todo [N] due::2026-05-15 Plan the next Zorg milestone.
+- @project/plan #z/todo #area/work [N] due::2026-05-15 Plan the next Zorg milestone.
   - ^task #z/todo [ ] do::2026-05-02 Write the implementation notes.
-    The plan links to its child +task and sibling ~review.
+    The plan links to #project/plan, its child +task and sibling ~review.
 
 ---
 
@@ -60,10 +70,19 @@ Nested zettel tokens
   (zettel_item
     (zettel_opening
       (list_marker)
-      (id)
-      (hash_reference)
+      (id
+        (id_segment)
+        (id_segment))
+      (type_tag
+        (id_segment)
+        (id_segment))
+      (tag
+        (id_segment)
+        (id_segment))
       (todo_marker)
-      (property)
+      (property
+        (property_key)
+        (property_value))
       (title_text)
       (title_text)
       (title_text)
@@ -72,10 +91,15 @@ Nested zettel tokens
     (zettel_item
       (zettel_opening
         (list_marker)
-        (local_id)
-        (hash_reference)
+        (local_id
+          (id_segment))
+        (type_tag
+          (id_segment)
+          (id_segment))
         (todo_marker)
-        (property)
+        (property
+          (property_key)
+          (property_value))
         (title_text)
         (title_text)
         (title_text)
@@ -86,10 +110,16 @@ Nested zettel tokens
           (title_text)
           (title_text)
           (title_text)
+          (absolute_link
+            (id_segment)
+            (id_segment))
           (title_text)
           (title_text)
-          (child_link)
+          (title_text)
+          (child_link
+            (id_segment))
           (title_text)
           (title_text)
-          (sibling_link)
+          (sibling_link
+            (id_segment))
           (title_text))))))

@@ -11,11 +11,20 @@ Query property example
   (zettel_item
     (zettel_opening
       (list_marker)
-      (id)
-      (hash_reference)
-      (property)
+      (id
+        (id_segment)
+        (id_segment)
+        (id_segment))
+      (type_tag
+        (id_segment)
+        (id_segment))
+      (property
+        (property_key)
+        (property_value))
       (title_text)
-      (property))))
+      (property
+        (property_key)
+        (property_value)))))
 
 ==================
 Query swog fence
@@ -33,9 +42,16 @@ Query swog fence
   (zettel_item
     (zettel_opening
       (list_marker)
-      (id)
-      (hash_reference)
-      (property))
+      (id
+        (id_segment)
+        (id_segment)
+        (id_segment))
+      (type_tag
+        (id_segment)
+        (id_segment))
+      (property
+        (property_key)
+        (property_value)))
     (fenced_code_block
       (fence_start
         (code_fence_delimiter)
@@ -60,10 +76,19 @@ Template fence
   (zettel_item
     (zettel_opening
       (list_marker)
-      (id)
-      (hash_reference)
-      (property)
-      (property))
+      (id
+        (id_segment)
+        (id_segment)
+        (id_segment))
+      (type_tag
+        (id_segment)
+        (id_segment))
+      (property
+        (property_key)
+        (property_value))
+      (property
+        (property_key)
+        (property_value)))
     (fenced_code_block
       (fence_start
         (code_fence_delimiter)

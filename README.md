@@ -41,7 +41,8 @@ The current checked-in grammar is a structural block grammar. It recognizes:
 - paragraphs and blank line separators
 - absolute IDs such as `@project/plan`
 - local IDs such as `^task`
-- hash references such as `#z/todo` and `#project/plan`
+- type tags such as `#z/todo`, ordinary tags such as `#area/work`, and
+  paragraph absolute links such as `#project/plan`
 - child and sibling links such as `+task` and `~review`
 - `key::value` properties
 - todo markers `[ ]`, `[N]`, `[X]`, and `[?]`
