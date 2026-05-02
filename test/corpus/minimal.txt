@@ -1,0 +1,81 @@
+==================
+Minimal file zettel
+==================
+
+%%% @minimal #z/ref area::work/research
+Minimal fixture
+%%%
+
+This file zettel demonstrates the smallest accepted `.z` source with an ID,
+property, tag, and paragraph.
+
+---
+
+(source_file
+  (file_header
+    (percent_fence)
+    (id)
+    (hash_reference)
+    (property)
+    (text)
+    (text)
+    (percent_fence))
+  (text)
+  (text)
+  (text)
+  (text)
+  (text)
+  (text)
+  (text)
+  (text)
+  (text)
+  (text)
+  (text)
+  (text)
+  (text)
+  (text)
+  (text)
+  (text))
+
+==================
+Nested zettel tokens
+==================
+
+- @project/plan #z/todo [N] due::2026-05-15 Plan the next Zorg milestone.
+  The plan links to its child +task and sibling ~review.
+
+  - ^task #z/todo [ ] do::2026-05-02 Write the implementation notes.
+
+---
+
+(source_file
+  (list_marker)
+  (id)
+  (hash_reference)
+  (todo_marker)
+  (property)
+  (text)
+  (text)
+  (text)
+  (text)
+  (text)
+  (text)
+  (text)
+  (text)
+  (text)
+  (text)
+  (text)
+  (child_link)
+  (text)
+  (text)
+  (sibling_link)
+  (text)
+  (list_marker)
+  (local_id)
+  (hash_reference)
+  (todo_marker)
+  (property)
+  (text)
+  (text)
+  (text)
+  (text))

@@ -1,0 +1,23 @@
+{
+  "name": "tree-sitter-zorg",
+  "version": "0.1.0",
+  "description": "Zorg grammar for Tree-sitter",
+  "private": true,
+  "type": "commonjs",
+  "keywords": [
+    "tree-sitter",
+    "zorg"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/zettel-org/zorg-treesitter.git"
+  },
+  "license": "MIT",
+  "scripts": {
+    "generate": "tree-sitter generate",
+    "test": "tree-sitter test"
+  },
+  "devDependencies": {
+    "tree-sitter-cli": "^0.26.8"
+  }
+}

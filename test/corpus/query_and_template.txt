@@ -1,0 +1,59 @@
+==================
+Query and template examples
+==================
+
+%%% @system #z/ref area::zorg/system
+Query and template fixture
+%%%
+
+- @system/queries/today #z/query title::Today query query::due:<=today
+  Runs a LIST query for work due today.
+
+- @system/templates/todo #z/tmpl title::Todo dest::inbox.z
+  ```zorg-template
+  - @{{id}} #z/todo [ ] do::{{date}} source::{{source}} {{title}}
+    {{body}}
+  ```
+
+---
+
+(source_file
+  (file_header
+    (percent_fence)
+    (id)
+    (hash_reference)
+    (property)
+    (text)
+    (text)
+    (text)
+    (text)
+    (percent_fence))
+  (list_marker)
+  (id)
+  (hash_reference)
+  (property)
+  (text)
+  (property)
+  (text)
+  (text)
+  (text)
+  (text)
+  (text)
+  (text)
+  (text)
+  (text)
+  (list_marker)
+  (id)
+  (hash_reference)
+  (property)
+  (property)
+  (code_fence)
+  (list_marker)
+  (text)
+  (hash_reference)
+  (todo_marker)
+  (property)
+  (property)
+  (text)
+  (text)
+  (code_fence))

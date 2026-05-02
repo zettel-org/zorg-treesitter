@@ -1,0 +1,15 @@
+# Tree-sitter generated parser output. Regenerate locally with:
+#   tree-sitter generate
+/src/
+
+# Local dependency and build output.
+/node_modules/
+/build/
+*.o
+*.so
+*.dylib
+*.dll
+
+# Local editor and package-manager state.
+.DS_Store
+.npm/
