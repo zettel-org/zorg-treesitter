@@ -1,0 +1,24 @@
+==================
+Legacy looking text
+==================
+
+ID::old-style-id
+LID::old-local-id
+tick::2026-05-02
+@@@rust
+old folgezettel 1a2b and file.zot are unsupported
+
+---
+
+(source_file
+  (text)
+  (text)
+  (text)
+  (text)
+  (text)
+  (text)
+  (text)
+  (text)
+  (text)
+  (text)
+  (text))

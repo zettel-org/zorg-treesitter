@@ -28,6 +28,7 @@ module.exports = grammar({
       $.child_link,
       $.sibling_link,
       $.hash_reference,
+      alias($._legacy_text, $.text),
       $.text,
     ),
 
@@ -45,6 +46,7 @@ module.exports = grammar({
       $.child_link,
       $.sibling_link,
       $.hash_reference,
+      alias($._legacy_text, $.text),
       $.text,
     ),
 
@@ -67,6 +69,9 @@ module.exports = grammar({
     sibling_link: _ => token(prec(2, /~[A-Za-z0-9][A-Za-z0-9_-]*/)),
 
     hash_reference: _ => token(prec(2, /#[A-Za-z0-9][A-Za-z0-9_-]*(\/[A-Za-z0-9][A-Za-z0-9_-]*)*/)),
+
+    // Legacy-looking property names must not be tokenized as v1 properties.
+    _legacy_text: _ => token(prec(3, /(ID|LID|tick)::[^\s]+/)),
 
     text: _ => token(prec(1, /[^\s]+/)),
   },

@@ -1,6 +1,6 @@
 # tree-sitter-zorg
 
-Tree-sitter grammar skeleton for Zorg `.z` files.
+Tree-sitter grammar for Zorg `.z` files.
 
 This repository supplies the parser and editor-query foundation for the Zorg
 toolchain. The syntax contract lives in `../zorg/docs`, especially:
@@ -9,10 +9,32 @@ toolchain. The syntax contract lives in `../zorg/docs`, especially:
 - `../zorg/docs/model.md`
 - `../zorg/fixtures/README.md`
 
-## Current Scope
+## Epic 2 Scope
 
-The Epic 1 grammar is intentionally small. It recognizes a document as a stream
-of conservative tokens:
+Epic 2 turns the Epic 1 token skeleton into the parser of record for Zorg v1
+source. The grammar should model Zorg structure and source spans, while leaving
+semantic validation to the Rust model and query layers.
+
+The public grammar contract is documented in `docs/grammar.md`. Keep that file
+in sync when adding or renaming public nodes.
+
+The grammar owns syntax nodes for:
+
+- file headers and their opening/closing fence boundaries
+- nested zettel openings and list nesting
+- paragraphs, blank lines, and fenced code blocks
+- IDs, local IDs, links, tags, type tags, properties, todo markers, and title
+  text
+
+The grammar intentionally does not implement:
+
+- link resolution, local-ID resolution, duplicate-ID detection, tag inheritance,
+  property value typing, query execution, or template expansion
+- broad Markdown parsing beyond the Zorg structures needed for source spans
+- compatibility syntax for the Python-era formats
+
+The current checked-in grammar is still the conservative token skeleton that
+later Epic 2 phases will replace with structural rules. It recognizes:
 
 - percent-fenced file headers
 - absolute IDs such as `@project/plan`
@@ -24,15 +46,13 @@ of conservative tokens:
 - Markdown-style code fences
 - basic text
 
-It does not implement the full semantic model, link resolution, tag
-inheritance, query execution, template expansion, diagnostics, or legacy syntax
-compatibility. In particular, there are no nodes for `.zo`, `.zoq`, `.zot`,
-`.zoc`, `ID::`, `LID::`, `tick::`, old folgezettel IDs, tag sugar, or
-Python-era link behavior.
+There are no nodes for `.zo`, `.zoq`, `.zot`, `.zoc`, `ID::`, `LID::`,
+`tick::`, old folgezettel IDs, tag sugar, or Python-era link behavior.
 
 ## Repository Layout
 
 - `grammar.js`: minimal executable grammar. Add new grammar rules here.
+- `docs/grammar.md`: public node names, naming rules, and semantic boundaries.
 - `test/corpus/`: Tree-sitter corpus tests seeded from the shared Zorg fixtures.
 - `corpus`: compatibility symlink to `test/corpus` for agents expecting the
   top-level path named in the Epic 1 plan.
@@ -82,3 +102,10 @@ tree-sitter test
 Use `../zorg/fixtures/corpus` as the source for additional shared examples.
 Keep new corpus cases small and avoid encoding speculative syntax before the
 semantic parser work lands.
+
+Before handing off grammar work, run:
+
+```sh
+npm run generate
+npm test
+```
