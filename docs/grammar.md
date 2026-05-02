@@ -122,6 +122,26 @@ same `fenced_code_block`, `fence_start`, `info_string`, `code_fence_body`,
 Consumers decide from tags and info strings whether to run query, template, or
 editor-injection behavior.
 
+## Generated Parser Policy
+
+Generated parser output is not part of the committed Epic 2 contract. Keep
+`src/` ignored, keep bindings disabled in `tree-sitter.json`, and regenerate
+locally with `npm run generate` before running tests or consuming
+`src/node-types.json`.
+
+Until a packaging phase deliberately commits generated C sources and enables
+bindings, downstream agents should treat these files as the stable inputs:
+
+- `grammar.js`
+- `docs/grammar.md`
+- `queries/*.scm`
+- `test/corpus/*.txt`
+- shared examples in `../zorg/fixtures/corpus/`
+
+Rust consumers should use the public nodes for source spans and perform
+semantic validation after parsing. Neovim consumers should use parser name
+`zorg`, filetype `zorg`, and the committed query files in this repository.
+
 ## No-Legacy Policy
 
 Legacy Python-era syntax is not v1 compatibility syntax. Do not add public nodes

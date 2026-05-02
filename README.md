@@ -26,6 +26,19 @@ The grammar owns syntax nodes for:
 - IDs, local IDs, links, tags, type tags, properties, todo markers, and title
   text
 
+Stable public node names are:
+
+- Blocks: `source_file`, `file_header`, `file_header_open`,
+  `file_header_close`, `zettel_item`, `zettel_opening`, `paragraph`,
+  `blank_line`, `fenced_code_block`, `fence_start`, `code_fence_body`,
+  `code_fence_content`, and `fence_end`.
+- Opening and fence tokens: `percent_fence`, `list_marker`,
+  `code_fence_delimiter`, and `info_string`.
+- Inline primitives: `id`, `id_segment`, `local_id`, `absolute_link`,
+  `child_link`, `sibling_link`, `tag`, `type_tag`, `property`,
+  `property_key`, `property_value`, `todo_marker`, and `title_text`.
+- Supporting line nodes: `header_line` and `paragraph_line`.
+
 The grammar intentionally does not implement:
 
 - link resolution, local-ID resolution, duplicate-ID detection, tag inheritance,
@@ -83,13 +96,30 @@ There are no nodes for `.zo`, `.zoq`, `.zot`, `.zoc`, `ID::`, `LID::`,
 
 ## Generated Artifacts
 
-Generated parser output is not committed in Epic 1. `tree-sitter generate`
-creates `src/parser.c`, `src/grammar.json`, `src/node-types.json`, and helper
-headers under `src/tree_sitter/`; `.gitignore` excludes those files for now.
+Epic 2 keeps generated parser output out of git. `tree-sitter generate` creates
+`src/parser.c`, `src/grammar.json`, `src/node-types.json`, and helper headers
+under `src/tree_sitter/`; `.gitignore` excludes `src/`, and
+`tree-sitter.json` keeps language bindings disabled.
 
-When this grammar is ready for published bindings, a later phase should decide
-which generated parser and binding files to commit, then enable the matching
-bindings in `tree-sitter.json`.
+Downstream Rust and Neovim integration work must run `npm install` and
+`npm run generate` before consuming generated files. Treat `grammar.js`,
+`docs/grammar.md`, `queries/*.scm`, and corpus fixtures as the committed parser
+contract until a packaging phase deliberately commits generated C sources and
+enables bindings.
+
+## Downstream Handoff
+
+Rust model work in `zorg-parse` should consume the public nodes above for
+source spans, then perform semantic validation for IDs, links, inherited tags,
+properties, query definitions, and diagnostics.
+
+Neovim work in `zorg-nvim` should register parser name `zorg` for filetype
+`zorg` and use the query files from this repository. The query files are
+tolerant of optional recovered nodes and rely only on public node names.
+
+Do not add compatibility behavior for `.zo`, `.zoq`, `.zot`, `.zoc`, `ID::`,
+`LID::`, `tick::`, `@@@` fences, old folgezettel IDs, tag sugar, or Python-era
+link behavior in downstream consumers.
 
 ## Development
 
@@ -144,3 +174,23 @@ tree-sitter highlight test/highlight/smoke.z
 The CLI may warn when no global parser directories are configured; that warning
 does not block this local grammar smoke test when highlighted output is
 produced.
+
+Compile the editor query files against the smoke fixture before changing node
+names or query captures:
+
+```sh
+npx tree-sitter query queries/highlights.scm test/highlight/smoke.z
+npx tree-sitter query queries/folds.scm test/highlight/smoke.z
+npx tree-sitter query queries/injections.scm test/highlight/smoke.z
+npx tree-sitter query queries/locals.scm test/highlight/smoke.z
+```
+
+As a final integration check, parse the shared Zorg fixtures:
+
+```sh
+npx tree-sitter parse ../zorg/fixtures/corpus/*.z ../zorg/fixtures/corpus/dir/*.z
+```
+
+Valid fixtures should not emit `ERROR` nodes. Legacy-looking fixtures may
+recover as ordinary text or syntax errors, but must not produce legacy
+compatibility nodes.
