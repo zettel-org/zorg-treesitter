@@ -47,8 +47,14 @@ The current checked-in grammar is a structural block grammar. It recognizes:
 - `key::value` properties
 - todo markers `[ ]`, `[N]`, `[X]`, and `[?]`
 - Markdown-style fenced code blocks, including fence boundaries, info strings,
-  and raw body lines
+  raw body wrappers, and raw body lines
 - title text
+
+Query and template definitions use the ordinary zettel grammar. A `#z/query`
+zettel may carry either `query::...` or a fenced `swog` block, and a `#z/tmpl`
+zettel may carry a fenced `zorg-template` block. The grammar preserves those
+fence info strings and raw bodies without parsing SWOG filters or template
+variables internally.
 
 The grammar models common two-space Zorg list indentation directly for stable
 source spans. It does not try to implement full Markdown list semantics.

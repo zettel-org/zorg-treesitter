@@ -56,7 +56,8 @@ Query swog fence
       (fence_start
         (code_fence_delimiter)
         (info_string))
-      (code_fence_content)
+      (code_fence_body
+        (code_fence_content))
       (fence_end
         (code_fence_delimiter)))))
 
@@ -93,6 +94,78 @@ Template fence
       (fence_start
         (code_fence_delimiter)
         (info_string))
-      (code_fence_content)
+      (code_fence_body
+        (code_fence_content))
+      (fence_end
+        (code_fence_delimiter)))))
+
+==================
+Ambiguous query syntax
+==================
+
+- @system/queries/ambiguous #z/query query::status:open
+  ```swog
+  #z/todo
+  ```
+
+---
+
+(source_file
+  (blank_line)
+  (zettel_item
+    (zettel_opening
+      (list_marker)
+      (id
+        (id_segment)
+        (id_segment)
+        (id_segment))
+      (type_tag
+        (id_segment)
+        (id_segment))
+      (property
+        (property_key)
+        (property_value)))
+    (fenced_code_block
+      (fence_start
+        (code_fence_delimiter)
+        (info_string))
+      (code_fence_body
+        (code_fence_content))
+      (fence_end
+        (code_fence_delimiter)))))
+
+==================
+Ordinary fenced code
+==================
+
+- @notes/code #z/ref title::Code
+  ```rust
+  let text = "`not a fence`";
+  println!("{}", text);
+  ```
+
+---
+
+(source_file
+  (blank_line)
+  (zettel_item
+    (zettel_opening
+      (list_marker)
+      (id
+        (id_segment)
+        (id_segment))
+      (type_tag
+        (id_segment)
+        (id_segment))
+      (property
+        (property_key)
+        (property_value)))
+    (fenced_code_block
+      (fence_start
+        (code_fence_delimiter)
+        (info_string))
+      (code_fence_body
+        (code_fence_content)
+        (code_fence_content))
       (fence_end
         (code_fence_delimiter)))))

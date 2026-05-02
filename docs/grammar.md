@@ -60,6 +60,9 @@ contract update and matching downstream audit.
   contract adds one.
 - `fenced_code_block`: Markdown triple-backtick code fence with raw body text.
 - `fence_start`: opening triple-backtick fence, including optional info string.
+- `code_fence_body`: source-backed raw body between the opening and closing
+  fence. The grammar does not parse language-specific internals here.
+- `code_fence_content`: one non-empty raw body line inside a fenced code block.
 - `fence_end`: closing triple-backtick fence.
 
 Zettel nesting is line-oriented and currently models normal Zorg two-space
@@ -111,6 +114,13 @@ The following behavior is intentionally outside the Tree-sitter grammar:
 - Parsing SWOG query internals inside fenced `swog` blocks.
 - Parsing template variables inside fenced `zorg-template` blocks.
 - Deciding whether a recovered malformed construct is an indexing diagnostic.
+
+Query and template definitions are ordinary Zorg zettel tagged with `#z/query`
+or `#z/tmpl`. Fenced `swog` and `zorg-template` blocks are represented by the
+same `fenced_code_block`, `fence_start`, `info_string`, `code_fence_body`,
+`code_fence_content`, and `fence_end` nodes as any other language fence.
+Consumers decide from tags and info strings whether to run query, template, or
+editor-injection behavior.
 
 ## No-Legacy Policy
 

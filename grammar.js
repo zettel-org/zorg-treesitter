@@ -166,46 +166,31 @@ module.exports = grammar({
 
     _fenced_code_block0: $ => seq(
       alias($._fence_start0, $.fence_start),
-      repeat(choice(
-        $.code_fence_content,
-        $.blank_line,
-      )),
+      optional($.code_fence_body),
       alias($._fence_end0, $.fence_end),
     ),
 
     _fenced_code_block1: $ => seq(
       alias($._fence_start1, $.fence_start),
-      repeat(choice(
-        $.code_fence_content,
-        $.blank_line,
-      )),
+      optional($.code_fence_body),
       alias($._fence_end1, $.fence_end),
     ),
 
     _fenced_code_block2: $ => seq(
       alias($._fence_start2, $.fence_start),
-      repeat(choice(
-        $.code_fence_content,
-        $.blank_line,
-      )),
+      optional($.code_fence_body),
       alias($._fence_end2, $.fence_end),
     ),
 
     _fenced_code_block3: $ => seq(
       alias($._fence_start3, $.fence_start),
-      repeat(choice(
-        $.code_fence_content,
-        $.blank_line,
-      )),
+      optional($.code_fence_body),
       alias($._fence_end3, $.fence_end),
     ),
 
     _fenced_code_block4: $ => seq(
       alias($._fence_start4, $.fence_start),
-      repeat(choice(
-        $.code_fence_content,
-        $.blank_line,
-      )),
+      optional($.code_fence_body),
       alias($._fence_end4, $.fence_end),
     ),
 
@@ -274,6 +259,11 @@ module.exports = grammar({
       $.code_fence_delimiter,
       $._line_end,
     ),
+
+    code_fence_body: $ => repeat1(choice(
+      $.code_fence_content,
+      $.blank_line,
+    )),
 
     code_fence_content: $ => seq(
       repeat1($._code_text),
@@ -429,7 +419,7 @@ module.exports = grammar({
       /`[^`\r\n]*`[.,]?/,
     ))),
 
-    _code_text: _ => token(prec(1, /[^`\r\n]+/)),
+    _code_text: _ => token(prec(1, /[^\r\n]+/)),
 
     _attached_text: _ => token(prec(1, /[.,:;!?]+/)),
 
