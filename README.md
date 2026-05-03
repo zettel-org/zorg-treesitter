@@ -159,6 +159,13 @@ npm run generate
 npm test
 ```
 
+To validate the full Zorg MVP across the Rust, Tree-sitter, and Neovim sibling
+repositories, run the Rust-root gate from `../zorg`:
+
+```sh
+../zorg/tools/validate_cross_repo.sh
+```
+
 Smoke-test editor highlighting with the representative `.z` fixture:
 
 ```sh
