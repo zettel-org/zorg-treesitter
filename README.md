@@ -9,11 +9,11 @@ toolchain. The syntax contract lives in `../zorg/docs`, especially:
 - `../zorg/docs/model.md`
 - `../zorg/fixtures/README.md`
 
-## Epic 2 Scope
+## Grammar Contract
 
-Epic 2 turns the Epic 1 token skeleton into the parser of record for Zorg v1
-source. The grammar should model Zorg structure and source spans, while leaving
-semantic validation to the Rust model and query layers.
+This repository is the parser of record for Zorg v1 source structure. The
+grammar models Zorg syntax and source spans, while semantic validation remains
+in the Rust model, store, query, capture, and fix layers.
 
 The public grammar contract is documented in `docs/grammar.md`. Keep that file
 in sync when adding or renaming public nodes.
@@ -81,7 +81,7 @@ There are no nodes for `.zo`, `.zoq`, `.zot`, `.zoc`, `ID::`, `LID::`,
 - `docs/grammar.md`: public node names, naming rules, and semantic boundaries.
 - `test/corpus/`: Tree-sitter corpus tests seeded from the shared Zorg fixtures.
 - `corpus`: compatibility symlink to `test/corpus` for agents expecting the
-  top-level path named in the Epic 1 plan.
+  top-level corpus path.
 - `queries/highlights.scm`: syntax highlight captures for IDs, links, tags,
   properties, todos, list/header/code fences, fence languages, and opening
   titles.
@@ -96,7 +96,8 @@ There are no nodes for `.zo`, `.zoq`, `.zot`, `.zoc`, `ID::`, `LID::`,
 
 ## Generated Artifacts
 
-Epic 2 keeps generated parser output out of git. `tree-sitter generate` creates
+The current source policy keeps generated parser output out of git.
+`tree-sitter generate` creates
 `src/parser.c`, `src/grammar.json`, `src/node-types.json`, and helper headers
 under `src/tree_sitter/`; `.gitignore` excludes `src/`, and
 `tree-sitter.json` keeps language bindings disabled.
@@ -149,8 +150,8 @@ tree-sitter test
 ```
 
 Use `../zorg/fixtures/corpus` as the source for additional shared examples.
-Keep new corpus cases small and avoid encoding speculative syntax before the
-semantic parser work lands.
+Keep new corpus cases small and avoid encoding speculative syntax outside the
+shared v1 syntax contract.
 
 Before handing off grammar work, run:
 

@@ -124,9 +124,9 @@ editor-injection behavior.
 
 ## Generated Parser Policy
 
-Generated parser output is not part of the committed Epic 2 contract. Keep
-`src/` ignored, keep bindings disabled in `tree-sitter.json`, and regenerate
-locally with `npm run generate` before running tests or consuming
+Generated parser output is not part of the committed source contract today.
+Keep `src/` ignored, keep bindings disabled in `tree-sitter.json`, and
+regenerate locally with `npm run generate` before running tests or consuming
 `src/node-types.json`.
 
 Until a packaging phase deliberately commits generated C sources and enables
